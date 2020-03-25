@@ -26,12 +26,11 @@ import tk.plogitech.darksky.forecast.model.Forecast;
 public class ExcelRepository {
 	Logger log = Logger.getLogger(ExcelRepository.class.getName());
 
+	private String subPath = "target//";
+
 	public void storeDarkSkyReports(List<Forecast> forecasts, String locationDescription) throws IOException {
-		File currDir = new File(".");
-		String path = currDir.getAbsolutePath();
-//		String path = "C:\\Temp";
 		Workbook workbook = null;
-		String fileLocation = path.substring(0, path.length() - 1) + locationDescription + ".xlsx";
+		String fileLocation = getFileLocation(locationDescription);
 		try {
 			workbook = readExcelFile(fileLocation);
 		} catch (FileNotFoundException e) {
@@ -46,11 +45,8 @@ public class ExcelRepository {
 	}
 
 	public void storeDarkSkyReport(Forecast forecast, String locationDescription) throws IOException {
-		File currDir = new File(".");
-		String path = currDir.getAbsolutePath();
-//		String path = "C:\\Temp";
 		Workbook workbook = null;
-		String fileLocation = path.substring(0, path.length() - 1) + locationDescription + ".xlsx";
+		String fileLocation = getFileLocation(locationDescription);
 		try {
 			workbook = readExcelFile(fileLocation);
 		} catch (FileNotFoundException e) {
@@ -443,5 +439,12 @@ public class ExcelRepository {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private String getFileLocation(String locationDescription) {
+		File currDir = new File(".");
+		String path = currDir.getAbsolutePath();
+		String fileLocation = path.substring(0, path.length() - 1) + subPath + locationDescription + ".xlsx";
+		return fileLocation;
 	}
 }

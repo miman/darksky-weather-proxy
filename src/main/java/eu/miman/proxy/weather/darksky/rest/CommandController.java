@@ -61,7 +61,7 @@ public class CommandController {
 			System.out.println("forecast " + forecast.getCurrently().getTemperature());
 
 			excelRepository.storeDarkSkyReport(forecast, name);
-			return "forecast stored Ok";
+			return "forecast for " + name + "stored Ok into file";
 		} catch (ForecastException e) {
 			e.printStackTrace();
 			return null;
@@ -94,7 +94,7 @@ public class CommandController {
 			System.out.println("forecast " + forecast.getCurrently().getTemperature());
 
 			excelRepository.storeDarkSkyReport(forecast, name);
-			return "forecast stored Ok";
+			return "forecast for " + name + "stored Ok into file";
 		} catch (ForecastException e) {
 			e.printStackTrace();
 			return null;
@@ -102,11 +102,11 @@ public class CommandController {
 	}
 
 	/**
-	 * Retrieves the weather for a specific date & location & stores this into the Excel file with the given name (in the project folder)
+	 * Retrieves the weather for all days for the specified year & location & stores this into the Excel file with the given name (in the project folder)
 	 * @param longitude	The longitude of the location to fetch the weather for
 	 * @param latitude	The latitude of the location to fetch the weather for
 	 * @param name	The name of the Excel file to store the data into
-	 * @param time	the date to get the data for (formatted according to '2011-12-03T10:15:30Z')
+	 * @param year	the year to get the data for (formatted according to '2011')
 	 * @return -
 	 * @throws IOException
 	 */
@@ -136,7 +136,7 @@ public class CommandController {
 			}
 		}
 		excelRepository.storeDarkSkyReports(forecastList, name);
-		return "forecast stored Ok";
+		return "forecast for " + name + "stored Ok into file";
 }
 
 	static public List<String> getAllYearDates(String year) {

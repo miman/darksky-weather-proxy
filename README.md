@@ -1,5 +1,5 @@
 # darksky-weather-proxy
-Proxy that can retreive weather info from Darksky &amp; store this into an Excel file
+Proxy that can retreive weather info from [Darksky](https://darksky.net/) &amp; store this into an Excel file
 
 # Usage
 Retrieve the weather data with the following URL's

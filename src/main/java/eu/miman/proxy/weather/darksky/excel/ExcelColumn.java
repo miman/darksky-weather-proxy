@@ -1,0 +1,33 @@
+package eu.miman.proxy.weather.darksky.excel;
+
+public enum ExcelColumn {
+	Time,
+	Latitude,
+	Longitude, 
+	temperatureHigh,
+	temperatureLow,
+	temperatureHighTime,
+	temperatureLowTime,
+	precipType,
+	precipIntensity,
+	precipIntensityMax,
+	precipProbability,
+	precipIntensityMaxTime,
+	precipAccumulation,
+	sunriseTime,
+	sunsetTime,
+	dewPoint,
+	humidity,
+	pressure,
+	windSpeed,
+	windGust,
+	windGustTime,
+	windBearing,
+	cloudCover,
+	uvIndex,
+	uvIndexTime,
+	visibility,
+	ozone,
+	icon,
+	summary
+}

@@ -1,6 +1,7 @@
 package eu.miman.proxy.weather.darksky.converters;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,31 +45,31 @@ public class ForecastConverter {
             entity.setPressure(dailyDataPoint.getPressure());
             entity.setSummary(dailyDataPoint.getSummary());
             if (dailyDataPoint.getSunriseTime() != null) {
-                entity.setSunriseTime(new Timestamp(dailyDataPoint.getSunriseTime().toEpochMilli()));
+                entity.setSunriseTime(LocalDateTime.ofInstant(dailyDataPoint.getSunriseTime(), ZoneId.of("GMT")));
             }
             if (dailyDataPoint.getSunsetTime() != null) {
-                entity.setSunsetTime(new Timestamp(dailyDataPoint.getSunsetTime().toEpochMilli()));
+                entity.setSunsetTime(LocalDateTime.ofInstant(dailyDataPoint.getSunsetTime(), ZoneId.of("GMT")));
             }
             entity.setTemperatureHigh(dailyDataPoint.getTemperatureHigh());
             if (dailyDataPoint.getTemperatureHighTime() != null) {
-                entity.setTemperatureHighTime(new Timestamp(dailyDataPoint.getTemperatureHighTime().toEpochMilli()));
+                entity.setTemperatureHighTime(LocalDateTime.ofInstant(dailyDataPoint.getTemperatureHighTime(), ZoneId.of("GMT")));
             }
             entity.setTemperatureLow(dailyDataPoint.getTemperatureLow());
             if (dailyDataPoint.getTemperatureLowTime() != null) {
-                entity.setTemperatureLowTime(new Timestamp(dailyDataPoint.getTemperatureLowTime().toEpochMilli()));
+                entity.setTemperatureLowTime(LocalDateTime.ofInstant(dailyDataPoint.getTemperatureLowTime(), ZoneId.of("GMT")));
             }
             if (dailyDataPoint.getTime() != null) {
-                entity.setTime(new Timestamp(dailyDataPoint.getTime().toEpochMilli()));
+                entity.setTime(LocalDateTime.ofInstant(dailyDataPoint.getTime(), ZoneId.of("GMT")));
             }
             entity.setUvIndex(dailyDataPoint.getUvIndex());
             if (dailyDataPoint.getUvIndexTime() != null) {
-                entity.setUvIndexTime(new Timestamp(dailyDataPoint.getUvIndexTime().toEpochMilli()));
+                entity.setUvIndexTime(LocalDateTime.ofInstant(dailyDataPoint.getUvIndexTime(), ZoneId.of("GMT")));
             }
             entity.setVisibility(dailyDataPoint.getVisibility());
             entity.setWindBearing(dailyDataPoint.getWindBearing());
             entity.setWindGust(dailyDataPoint.getWindGust());
             if (dailyDataPoint.getWindGustTime() != null) {
-                entity.setWindGustTime(new Timestamp(dailyDataPoint.getWindGustTime().toEpochMilli()));
+                entity.setWindGustTime(LocalDateTime.ofInstant(dailyDataPoint.getWindGustTime(), ZoneId.of("GMT")));
             }
             entity.setWindSpeed(dailyDataPoint.getWindSpeed());
         }

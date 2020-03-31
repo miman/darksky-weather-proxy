@@ -1,12 +1,17 @@
 package eu.miman.proxy.weather.darksky.db.entities;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Entity
 @Table(name="forecast", schema="weather")
@@ -24,30 +29,46 @@ public class ForecastEntity {
     private Double longitude;
     private String summary;
     private String iconUrl;
-    private Timestamp time;
-    private Timestamp sunriseTime;
-    private Timestamp sunsetTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime time;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime sunriseTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime sunsetTime;
     private Double moonPhase;
     private Double precipIntensity;
     private Double precipIntensityMax;
     private Double precipProbability;
-    private Timestamp precipIntensityMaxTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime precipIntensityMaxTime;
     private Double precipAccumulation;
     private String precipType;
     private Double temperatureHigh;
-    private Timestamp temperatureHighTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime temperatureHighTime;
     private Double temperatureLow;
-    private Timestamp temperatureLowTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime temperatureLowTime;
     private Double dewPoint;
     private Double humidity;
     private Double pressure;
     private Double windSpeed;
     private Double windGust;
-    private Timestamp windGustTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime windGustTime;
     private Integer windBearing;
     private Double cloudCover;
     private Integer uvIndex;
-    private Timestamp uvIndexTime;
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime uvIndexTime;
     private Double visibility;
     private Double ozone;
 
@@ -99,27 +120,27 @@ public class ForecastEntity {
         this.iconUrl = iconUrl;
     }
 
-    public Timestamp getTime() {
+    public LocalDateTime getTime() {
         return time;
     }
 
-    public void setTime(Timestamp time) {
+    public void setTime(LocalDateTime time) {
         this.time = time;
     }
 
-    public Timestamp getSunriseTime() {
+    public LocalDateTime getSunriseTime() {
         return sunriseTime;
     }
 
-    public void setSunriseTime(Timestamp sunriseTime) {
+    public void setSunriseTime(LocalDateTime sunriseTime) {
         this.sunriseTime = sunriseTime;
     }
 
-    public Timestamp getSunsetTime() {
+    public LocalDateTime getSunsetTime() {
         return sunsetTime;
     }
 
-    public void setSunsetTime(Timestamp sunsetTime) {
+    public void setSunsetTime(LocalDateTime sunsetTime) {
         this.sunsetTime = sunsetTime;
     }
 
@@ -155,11 +176,11 @@ public class ForecastEntity {
         this.precipProbability = precipProbability;
     }
 
-    public Timestamp getPrecipIntensityMaxTime() {
+    public LocalDateTime getPrecipIntensityMaxTime() {
         return precipIntensityMaxTime;
     }
 
-    public void setPrecipIntensityMaxTime(Timestamp precipIntensityMaxTime) {
+    public void setPrecipIntensityMaxTime(LocalDateTime precipIntensityMaxTime) {
         this.precipIntensityMaxTime = precipIntensityMaxTime;
     }
 
@@ -187,11 +208,11 @@ public class ForecastEntity {
         this.temperatureHigh = temperatureHigh;
     }
 
-    public Timestamp getTemperatureHighTime() {
+    public LocalDateTime getTemperatureHighTime() {
         return temperatureHighTime;
     }
 
-    public void setTemperatureHighTime(Timestamp temperatureHighTime) {
+    public void setTemperatureHighTime(LocalDateTime temperatureHighTime) {
         this.temperatureHighTime = temperatureHighTime;
     }
 
@@ -203,11 +224,11 @@ public class ForecastEntity {
         this.temperatureLow = temperatureLow;
     }
 
-    public Timestamp getTemperatureLowTime() {
+    public LocalDateTime getTemperatureLowTime() {
         return temperatureLowTime;
     }
 
-    public void setTemperatureLowTime(Timestamp temperatureLowTime) {
+    public void setTemperatureLowTime(LocalDateTime temperatureLowTime) {
         this.temperatureLowTime = temperatureLowTime;
     }
 
@@ -251,11 +272,11 @@ public class ForecastEntity {
         this.windGust = windGust;
     }
 
-    public Timestamp getWindGustTime() {
+    public LocalDateTime getWindGustTime() {
         return windGustTime;
     }
 
-    public void setWindGustTime(Timestamp windGustTime) {
+    public void setWindGustTime(LocalDateTime windGustTime) {
         this.windGustTime = windGustTime;
     }
 
@@ -283,11 +304,11 @@ public class ForecastEntity {
         this.uvIndex = uvIndex;
     }
 
-    public Timestamp getUvIndexTime() {
+    public LocalDateTime getUvIndexTime() {
         return uvIndexTime;
     }
 
-    public void setUvIndexTime(Timestamp uvIndexTime) {
+    public void setUvIndexTime(LocalDateTime uvIndexTime) {
         this.uvIndexTime = uvIndexTime;
     }
 

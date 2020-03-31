@@ -4,8 +4,12 @@ import java.util.Locale;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories(basePackages={"eu.miman.proxy.weather.darksky.db"})
+@ComponentScan(basePackages={"eu.miman.proxy.weather.darksky"})
 public class DarkskyWeatherProxyApplication {
 
 	public static void main(String[] args) {

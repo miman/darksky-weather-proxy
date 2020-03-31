@@ -13,14 +13,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import eu.miman.proxy.weather.darksky.converters.ForecastConverter;
+import eu.miman.proxy.weather.darksky.db.entities.ForecastEntity;
+import eu.miman.proxy.weather.darksky.db.repos.ForecastRepository;
 import eu.miman.proxy.weather.darksky.excel.ExcelRepository;
 import tk.plogitech.darksky.api.jackson.DarkSkyJacksonClient;
 import tk.plogitech.darksky.forecast.APIKey;
 import tk.plogitech.darksky.forecast.ForecastException;
 import tk.plogitech.darksky.forecast.ForecastRequest;
 import tk.plogitech.darksky.forecast.ForecastRequestBuilder;
-import tk.plogitech.darksky.forecast.GeoCoordinates;
 import tk.plogitech.darksky.forecast.ForecastRequestBuilder.Language;
+import tk.plogitech.darksky.forecast.GeoCoordinates;
 import tk.plogitech.darksky.forecast.model.Forecast;
 import tk.plogitech.darksky.forecast.model.Latitude;
 import tk.plogitech.darksky.forecast.model.Longitude;
@@ -33,6 +36,12 @@ public class CommandController {
 
 	@Autowired
 	ExcelRepository excelRepository;
+
+	@Autowired
+	ForecastRepository forecastRepository;
+
+	@Autowired
+	ForecastConverter forecastConverter;
 
 	public CommandController() {
 		darkskyApiKey = System.getProperty("darkskyApiKey");
@@ -61,11 +70,21 @@ public class CommandController {
 			System.out.println("forecast " + forecast.getCurrently().getTemperature());
 
 			excelRepository.storeDarkSkyReport(forecast, name);
-			return "forecast for " + name + "stored Ok into file";
-		} catch (ForecastException e) {
+
+			storeForecastToDb(name, forecast);
+			return "forecast for " + name + "stored Ok into file & Db";
+		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	private void storeForecastToDb(String name, Forecast forecast) {
+		ForecastEntity forecastEntity = new ForecastEntity();
+		forecastEntity.setName(name);
+		forecastConverter.copyToEntity(forecast, forecastEntity);
+		forecastRepository.save(forecastEntity);
+		log.info("forecast stored to Db");
 	}
 
 	/**
@@ -94,6 +113,7 @@ public class CommandController {
 			System.out.println("forecast " + forecast.getCurrently().getTemperature());
 
 			excelRepository.storeDarkSkyReport(forecast, name);
+			storeForecastToDb(name, forecast);
 			return "forecast for " + name + "stored Ok into file";
 		} catch (ForecastException e) {
 			e.printStackTrace();
@@ -134,6 +154,7 @@ public class CommandController {
 				e.printStackTrace();
 				return null;
 			}
+			storeForecastToDb(name, forecast);
 		}
 		excelRepository.storeDarkSkyReports(forecastList, name);
 		return "forecast for " + name + "stored Ok into file";
